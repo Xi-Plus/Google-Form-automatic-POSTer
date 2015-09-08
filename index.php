@@ -1,10 +1,16 @@
 <?php
+set_time_limit($set_time_limit);
 include("curl.php");
 include("config.php");
-set_time_limit($set_time_limit);
+$csv=file_get_contents($csv_file_name);
+$csv=explode("\r\n",$csv);
+$line=$csv[0];
+$namelist=str_getcsv($line);
+unset($csv[0]);
 echo "POST to ".$form_url."<hr>";
 $count=0;
-foreach($valuelist as $value){
+foreach($csv as $line){
+	$value=str_getcsv($line);
 	$count++;
 	echo "#".$count." ";
 	$post=array();
