@@ -1,13 +1,13 @@
 <?php
-set_time_limit($set_time_limit);
-include("curl.php");
 include("config.php");
-$csv=file_get_contents($csv_file_name);
+set_time_limit($config["set_time_limit"]);
+include($config["curl_dir"]);
+$csv=file_get_contents($config["csv_file_name"]);
 $csv=explode("\r\n",$csv);
 $line=$csv[0];
 $namelist=str_getcsv($line);
 unset($csv[0]);
-echo "POST to ".$form_url."<hr>";
+echo "POST to ".$config["form_url"]."<hr>";
 $count=0;
 foreach($csv as $line){
 	$value=str_getcsv($line);
@@ -19,7 +19,7 @@ foreach($csv as $line){
 	}
 	var_dump($post);
 	echo "<br>";
-	$cont=httpRequest($form_url,$post,true);
+	$cont=cURL_HTTP_Request($config["form_url"],$post);
 	echo $cont->html;
 	echo "<hr>";
 }
