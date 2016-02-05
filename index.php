@@ -1,7 +1,7 @@
 <?php
 include("config.php");
 set_time_limit($config["set_time_limit"]);
-include($config["curl_dir"]);
+include("cURL-HTTP-function/curl.php");
 $csv=file_get_contents($config["csv_file_name"]);
 $csv=explode("\r\n",$csv);
 $line=$csv[0];
