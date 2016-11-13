@@ -7,9 +7,12 @@ $csv=explode("\r\n",$csv);
 $line=$csv[0];
 $namelist=str_getcsv($line);
 unset($csv[0]);
-echo "POST to ".$config["form_url"]."<hr>";
+echo "POST to ".$config["form_url"]."\n";
 $count=0;
 foreach($csv as $line){
+	if (trim($line) == "") {
+		continue;
+	}
 	$value=str_getcsv($line);
 	$count++;
 	echo "#".$count." ";
@@ -18,9 +21,7 @@ foreach($csv as $line){
 		$post[$namelist[$i]]=$value[$i];
 	}
 	var_dump($post);
-	echo "<br>";
 	$cont=cURL_HTTP_Request($config["form_url"],$post);
-	echo $cont->html;
-	echo "<hr>";
+	echo "\n";
 }
 ?>
